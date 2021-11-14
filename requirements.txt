@@ -1,9 +1,7 @@
 flask 
-random
 flask_sqlalchemy
 string
 flask_migrate
-random
 pickle
 pandas
 numpy
