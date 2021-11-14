@@ -1,6 +1,5 @@
 flask 
 flask_sqlalchemy
-string
 flask_migrate
 pickle
 pandas
