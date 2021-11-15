@@ -3,7 +3,8 @@ from logging import log
 from flask_migrate import Migrate
 import random
 
-from flask import Flask, request, session
+import flask
+from flask import Flask, request, session, Blueprint
 from flask_cors import CORS, cross_origin
 
 from google.oauth2 import id_token
@@ -14,6 +15,7 @@ import string
 import random
 
 app = Flask(__name__)
+bp = Blueprint("bp", __name__, template_folder="./build")
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -63,6 +65,10 @@ class User(db.Model):
             'name': self.name,
             'email': self.email
         }
+
+@app.route('/')
+def index():
+	return flask.render_template("index.html")
 
 @app.route('/api/authenticated_endpoint', methods=['POST'])
 @cross_origin()
