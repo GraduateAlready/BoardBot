@@ -12,8 +12,9 @@ from flask_sqlalchemy import SQLAlchemy
 
 import string
 import random
+import os
 
-app = Flask(__name__, static_folder="build/static", template_folder="build")
+app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -29,7 +30,7 @@ app.config["DATABASE_URL"] = uri
 app.config["SQLALCHEMY_DATABASE_URI"] = uri
 
 # Replace with your client ID later.
-CLIENT_ID = '757547404515-2n22h5rprveqe2f6ji46c2b6iiii1i63.apps.googleusercontent.com'
+CLIENT_ID = os.getenv("REACT_APP_GOOGLE_CLIENT_ID")
 
 app.config["DATABASE_URL"] = uri
 app.config["SQLALCHEMY_DATABASE_URI"] = uri
@@ -63,10 +64,6 @@ class User(db.Model):
             'name': self.name,
             'email': self.email
         }
-
-@app.route("/")
-def hello():
-    return render_template('index.html')
 
 @app.route('/api/authenticated_endpoint', methods=['POST'])
 @cross_origin()
