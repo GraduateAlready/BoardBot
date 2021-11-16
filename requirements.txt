@@ -1,4 +1,10 @@
 flask 
 flask_sqlalchemy
-flask_migrate
 gunicorn
+flask_cors
+flask-migrate
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+Flask-SQLAlchemy
+flask-cors
