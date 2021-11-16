@@ -14,7 +14,7 @@ import string
 import random
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="build/static", template_folder="build")
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -104,6 +104,10 @@ def set_token(token):
         # Invalid token
         pass
     return res
+
+@app.route("/")
+def hello():
+    return render_template('index.html')
 
 # Enable CORS so frontend (localhost:3000) can communicate with backend (localhost:5000)
 @app.route('/api/auth', methods=['POST'])
