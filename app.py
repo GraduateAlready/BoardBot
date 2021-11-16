@@ -3,7 +3,7 @@ from logging import log
 from flask_migrate import Migrate
 import random
 
-from flask import Flask, request, session
+from flask import Flask, request, session, render_template
 from flask_cors import CORS, cross_origin
 
 from google.oauth2 import id_token
@@ -13,7 +13,7 @@ from flask_sqlalchemy import SQLAlchemy
 import string
 import random
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="build/static", template_folder="build")
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -63,6 +63,10 @@ class User(db.Model):
             'name': self.name,
             'email': self.email
         }
+
+@app.route("/")
+def hello():
+    return render_template('index.html')
 
 @app.route('/api/authenticated_endpoint', methods=['POST'])
 @cross_origin()
@@ -139,7 +143,6 @@ def google_sign_in():
     # convert into JSON:
     json_res = json.dumps(res)
     return json_res
-
 
 if __name__ == '__main__':
     app.run()
