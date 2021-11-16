@@ -1,9 +1,5 @@
-flask-migrate
-flask
-flask-sqlalchemy
-google-api-python-client
-google-auth-httplib2
-google-auth-oauthlib
-Flask-SQLAlchemy
-flask-cors
-gunicorn
+flask 
+flask_sqlalchemy
+flask_migrate
+pandas
+
