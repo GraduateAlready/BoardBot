@@ -2,3 +2,6 @@ flask
 flask_sqlalchemy
 flask_migrate
 gunicorn
+flask_cors
+google.oauth2
+google.auth.transport
