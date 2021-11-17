@@ -25,16 +25,16 @@ app.secret_key = '-' \
                     .join(random.choices(string.ascii_uppercase + \
                     string.digits, k=10))
 
-URI = "postgresql://postgres:admin@localhost/postgres"  # or other relevant config var
-
-app.config["DATABASE_URL"] = URI
-app.config["SQLALCHEMY_DATABASE_URI"] = URI
+# URI = "postgresql://postgres:admin@localhost/postgres"  # or other relevant config var
+uri = os.getenv("DATABASE_URL")
+if uri and uri.startswith("postgres://") :
+    uri = uri.replace("postgres://", "postgresql://")
 
 # Replace with your client ID later.
 CLIENT_ID = os.getenv("REACT_APP_GOOGLE_CLIENT_ID")
 
-app.config["DATABASE_URL"] = URI
-app.config["SQLALCHEMY_DATABASE_URI"] = URI
+app.config["DATABASE_URL"] = uri
+app.config["SQLALCHEMY_DATABASE_URI"] = uri
 
 
 app.config["SQLALCHEMY_ECHO"] = False
