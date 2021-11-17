@@ -44,6 +44,7 @@ db = SQLAlchemy(app)
 
 migrate = Migrate(app, db)
 
+# database model for storing user data
 class User(db.Model):
     '''User Model'''
     __tablename__ = 'users'
