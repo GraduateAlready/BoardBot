@@ -5,6 +5,7 @@ import pandas as pd
 import pickle
 from itertools import chain
 
+# get table details with GET query 
 sync = {
     "client": {
         "enforces_product_passwords": 1,
