@@ -4,17 +4,20 @@ import os
 # import json
 import random
 
+
+#importing pyhton modules
 from flask_migrate import Migrate
 
 
 from flask import Flask, request, session, render_template, jsonify
 from flask_cors import CORS, cross_origin
 
+#importing Google OAuth which enables login using "Sign in with Google"
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from flask_sqlalchemy import SQLAlchemy
 
-
+# serving the Flask Shell App using CORS
 app = Flask(__name__, static_folder="build/static", template_folder="build")
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -33,6 +36,7 @@ if uri and uri.startswith("postgres://") :
 # Replace with your client ID later.
 CLIENT_ID = os.getenv("REACT_APP_GOOGLE_CLIENT_ID")
 
+# sqlalchemy to enable connection to the database uri
 app.config["DATABASE_URL"] = uri
 app.config["SQLALCHEMY_DATABASE_URI"] = uri
 
@@ -61,6 +65,7 @@ class User(db.Model):
     def __repr__(self):
         return f"<id {self.id}>"
 
+#  self-serialization  of the database fields
     def serialize(self):
         '''serialize'''
         return {
@@ -152,6 +157,8 @@ def google_sign_in():
 
     user=User.query.filter_by(email=email).first()
 
+# setting the token 
+
     if user:
         res = set_token(token)
     else :
@@ -179,6 +186,6 @@ def migrate_db():
 
     return "DB migration is done"
 
-
+# app main
 if __name__ == '__main__':
     app.run()
