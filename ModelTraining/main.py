@@ -5,6 +5,7 @@ import pandas as pd
 from getClimbs import *
 
 
+# render API from kilterboardapp.com
 def getClimbAngle(angle, uuid, auth):
     climbinfourl = "https://api.kilterboardapp.com/v1/climbs/" + uuid + "/info?angle="
     r = requests.get(url=climbinfourl + str(angle), headers=auth)
