@@ -129,6 +129,27 @@ def google_sign_in():
     email = request_data['login']
     res = {}
 
+    try:
+        user=User.query.filter_by(email=email).first()
+
+        if user:
+            res = set_token(token)
+        else :
+            try:
+                user=User(
+                    id=id,
+                    name=name,
+                    email=email
+                )
+                db.session.add(user)
+                db.session.commit()
+            except Exception as e:
+                pass
+            res = set_token(token)
+
+    except Exception as e:
+        pass
+
     user=User.query.filter_by(email=email).first()
 
     if user:

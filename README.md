@@ -1,3 +1,8 @@
+### --- Deployment ---
+The web application is deployed on a Heroku site:
+
+https://graduatealreadyprojerct.herokuapp.com/
+
 # BoardBot
 
 A node.js module to interface with a boardbot, running on Python Flask and served with React.
@@ -55,12 +60,6 @@ $ npm start
 The program uses Google OAuth Sign In to login into the system. A "Sign In with Google" option shows up to prompt the user to sign in to the site.
 After selecting the account, the user data is saved in a local database and displayed and the top right of the navbar.
 The program then proceeds to the main section of the web app.
-
-### --- Deployment ---
-The web application is deployed on a Heroku site:
-
-https://graduatealreadyprojerct.herokuapp.com/ 
-
 
 
 ### --- Acknowledgements ---
