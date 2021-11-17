@@ -147,5 +147,14 @@ def google_sign_in():
     json_res = json.dumps(res)
     return json_res
 
+@app.route("/api/migrate")
+def migrate_db():
+    """migrate"""
+    db.create_all()
+    db.session.commit()
+
+    return "DB migration is done"
+
+
 if __name__ == '__main__':
     app.run()
