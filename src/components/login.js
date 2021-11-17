@@ -33,7 +33,7 @@ export default class Login extends Component {
       token: this.state.googleToken,
       name: userName
     }
-    fetch('/auth', {
+    fetch('api/auth', {
       method: 'POST',
       body: JSON.stringify(body),
       headers: { 'Content-Type': 'application/json' }
