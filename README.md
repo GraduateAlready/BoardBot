@@ -3,6 +3,9 @@ The web application is deployed on a Heroku site:
 
 https://graduatealreadyprojerct.herokuapp.com/
 
+# Kanban Board
+https://github.com/users/Keegan652/projects/1
+
 # BoardBot
 
 A node.js module to interface with a boardbot, running on Python Flask and served with React.
