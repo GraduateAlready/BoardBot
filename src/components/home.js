@@ -94,7 +94,7 @@ export default class Home extends Component {
         </form>
         <canvas id="myCanvas" width="1080" height="1170"></canvas>
         {<makeImage />}
-
+        <img src={require('./kilterboard.png')} />
       </div>
     );
   }
