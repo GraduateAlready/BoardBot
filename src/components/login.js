@@ -36,6 +36,8 @@ export default class Login extends Component {
       token: this.state.googleToken,
       name: userName
     }
+
+    console.log("login_body", body);
     fetch('api/auth', {
       method: 'POST',
       body: JSON.stringify(body),
