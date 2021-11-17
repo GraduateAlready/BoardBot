@@ -1,7 +1,11 @@
+'''app.py'''
+import string
+import os
 import json
-from logging import log
-from flask_migrate import Migrate
 import random
+
+from flask_migrate import Migrate
+
 
 from flask import Flask, request, session, render_template
 from flask_cors import CORS, cross_origin
@@ -10,30 +14,27 @@ from google.oauth2 import id_token
 from google.auth.transport import requests
 from flask_sqlalchemy import SQLAlchemy
 
-import string
-import random
-import os
 
 app = Flask(__name__, static_folder="build/static", template_folder="build")
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-# TODO: Replace secret key in an actual prod environment (See this article)
-# https://blog.paradoxis.nl/defeating-flasks-session-management-65706ba9d3ce
-# In a nutshell, hackers can use a rainbow table against your session to find out the secret key and parrot your app.
-app.secret_key = f'INSECURE_DEV_SECRET_KEY_REPLACE_STATICALLY_IN_PROD_'.join(random.choices(string.ascii_uppercase +
-                                                                                            string.digits, k=10))
+# In a nutshell, hackers can use a rainbow table against your session to
+# find out the secret key and parrot your app.
+app.secret_key = '-' \
+                    .join(random.choices(string.ascii_uppercase + \
+                    string.digits, k=10))
 
-uri = "postgresql://postgres:admin@localhost/postgres"  # or other relevant config var
+URI = "postgresql://postgres:admin@localhost/postgres"  # or other relevant config var
 
-app.config["DATABASE_URL"] = uri
-app.config["SQLALCHEMY_DATABASE_URI"] = uri
+app.config["DATABASE_URL"] = URI
+app.config["SQLALCHEMY_DATABASE_URI"] = URI
 
 # Replace with your client ID later.
 CLIENT_ID = os.getenv("REACT_APP_GOOGLE_CLIENT_ID")
 
-app.config["DATABASE_URL"] = uri
-app.config["SQLALCHEMY_DATABASE_URI"] = uri
+app.config["DATABASE_URL"] = URI
+app.config["SQLALCHEMY_DATABASE_URI"] = URI
 
 
 app.config["SQLALCHEMY_ECHO"] = False
@@ -44,23 +45,25 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 class User(db.Model):
+    '''User Model'''
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
     email = db.Column(db.String())
 
-    def __init__(self, id, name, email):
-        self.id = id
+    def __init__(self, idx, name, email):
+        self.id = idx
         self.name = name
         self.email = email
 
     def __repr__(self):
-        return '<id {}>'.format(self.id)
-    
+        return f"<id {self.id}>"
+
     def serialize(self):
+        '''serialize'''
         return {
-            'id': self.id, 
+            'id': self.id,
             'name': self.name,
             'email': self.email
         }
@@ -68,6 +71,7 @@ class User(db.Model):
 @app.route('/api/authenticated_endpoint', methods=['POST'])
 @cross_origin()
 def authenticated_endpoint():
+    '''authenticated_endpoint'''
     request_data = request.get_json()
     token = request_data['token']
     res = {}
@@ -85,6 +89,7 @@ def authenticated_endpoint():
     return json_res
 
 def set_token(token):
+    '''set_token'''
     res = {}
     session_user = ""
     try:
@@ -97,50 +102,46 @@ def set_token(token):
         res = {
             "token": session_user
         }
-    except ValueError as e:
+    except ValueError as ex:
         res = {
-            "error": e
+            "error": ex
         }
         # Invalid token
-        pass
+
     return res
 
 @app.route("/")
 def hello():
+    '''Main Page'''
     return render_template('index.html')
 
 # Enable CORS so frontend (localhost:3000) can communicate with backend (localhost:5000)
 @app.route('/api/auth', methods=['POST'])
 @cross_origin()
 def google_sign_in():
+    '''google_sign_in'''
     request_data = request.get_json()
-    id = random.randint(1,300)
+    idx = random.randint(1,300)
     token = request_data['token']
     name = request_data['name']
     email = request_data['login']
     res = {}
 
-    try:
-        user=User.query.filter_by(email=email).first()
+    user=User.query.filter_by(email=email).first()
 
-        if user: 
-            res = set_token(token)
-        else :
-            try:
-                user=User(
-                    id=id,
-                    name=name,
-                    email=email
-                )
-                db.session.add(user)
-                db.session.commit()
-            except Exception as e:
-                pass
-            res = set_token(token)    
+    if user:
+        res = set_token(token)
+    else :
+        user=User(
+            idx=idx,
+            name=name,
+            email=email
+        )
+        db.session.add(user)
+        db.session.commit()
 
-    except Exception as e:
-        pass
-    
+        res = set_token(token)
+
     # convert into JSON:
     json_res = json.dumps(res)
     return json_res

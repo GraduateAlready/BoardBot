@@ -1,0 +1,4 @@
+[DEFAULT]
+ignored-classes=scoped_session,SQLAlchemy
+variable-rgx=[A-Za-z_][A-Za-z0-9_]*$
+attr-rgx=[A-Za-z_][A-Za-z0-9_]*$
