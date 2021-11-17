@@ -9,6 +9,7 @@ Install Node.js on the host system.
 Check successful installation by running:
 
 $ node -v
+
 $ npm -v
 
 These should successfully return the node and npm versions of the system.
