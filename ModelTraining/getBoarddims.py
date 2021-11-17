@@ -133,6 +133,8 @@ auth = "Bearer " + r.json()["token"]
 
 headers = {"Authorization": auth}
 
+
+# handle requests from kilterboardapp.com
 r = requests.post("https://api.kilterboardapp.com/v1/sync", json=sync)
 
 climbs = r.json()["PUT"]["climbs"]
