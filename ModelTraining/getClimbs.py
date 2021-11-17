@@ -4,7 +4,7 @@ import json
 import pandas as pd
 import glob
 
-
+# get authentication from Kilterboardapp
 def getAuth():
     r = requests.post(
         "https://api.kilterboardapp.com/v1/logins",
