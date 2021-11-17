@@ -25,8 +25,8 @@ app.secret_key = '-' \
                     .join(random.choices(string.ascii_uppercase + \
                     string.digits, k=10))
 
-# URI = "postgresql://postgres:admin@localhost/postgres"  # or other relevant config var
 uri = os.getenv("DATABASE_URL")
+
 if uri and uri.startswith("postgres://") :
     uri = uri.replace("postgres://", "postgresql://")
 
