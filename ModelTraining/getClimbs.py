@@ -17,7 +17,7 @@ def getAuth():
 
     return headers
 
-
+# get placememnt map data from pickle
 def getPlacementMap():
     with open("idmap.data", "rb") as f:
         placementMap = pickle.load(f)
