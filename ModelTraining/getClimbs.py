@@ -24,7 +24,7 @@ def getPlacementMap():
 
     return placementMap
 
-
+# construct the binary map using array digits
 def constructBinaryMap():
     binarymap = []
     for y in range(0, 476):
