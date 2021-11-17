@@ -1,13 +1,13 @@
 '''app.py'''
 import string
 import os
-import json
+# import json
 import random
 
 from flask_migrate import Migrate
 
 
-from flask import Flask, request, session, render_template
+from flask import Flask, request, session, render_template, jsonify
 from flask_cors import CORS, cross_origin
 
 from google.oauth2 import id_token
@@ -86,7 +86,8 @@ def authenticated_endpoint():
             res = {
                 'error': 'token is invalid!'
             }
-    json_res = json.dumps(res)
+    # json_res = json.dumps(res)
+    json_res = jsonify(res)
     return json_res
 
 def set_token(token):
@@ -144,7 +145,9 @@ def google_sign_in():
         res = set_token(token)
 
     # convert into JSON:
-    json_res = json.dumps(res)
+    # json_res = json.dumps(res)
+    json_res = jsonify(res)
+
     return json_res
 
 @app.route("/api/migrate")
