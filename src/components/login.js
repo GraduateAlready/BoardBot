@@ -4,6 +4,7 @@ import { GoogleLogin } from 'react-google-login';
 import GoogleButton from 'react-google-button';
 import DefaultProfilePicture from '../assets/images/profile.png';
 
+// constant variables
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 var x = 0;
 var y = 0;
