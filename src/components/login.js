@@ -5,6 +5,9 @@ import GoogleButton from 'react-google-button';
 import DefaultProfilePicture from '../assets/images/profile.png';
 
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
+var x = 0;
+var y = 0;
+var w = 0;
 
 export default class Login extends Component {
   state = {
@@ -69,6 +72,7 @@ export default class Login extends Component {
               onSuccess={this.onGoogleLoginSuccess}
               onFailure={({ details }) => { toast.error(details) }}
             />
+
           </div>
         </div>
       </div>
