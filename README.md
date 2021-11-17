@@ -68,4 +68,5 @@ The program then proceeds to the main section of the web app.
 ### --- Acknowledgements ---
 
 ### Citations
-Lei Xu, Maria Skoularidou, Alfredo Cuesta-Infante, Kalyan Veeramachaneni. Modeling Tabular data using Conditional GAN. NeurIPS, 2019.
+Lei Xu, Maria Skoularidou, Alfredo Cuesta-Infante, Kalyan Veeramachaneni. 
+Modeling Tabular data using Conditional GAN. NeurIPS, 2019.
