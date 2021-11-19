@@ -30,6 +30,8 @@ export default class Login extends Component {
       googleToken: userToken
     })
 
+ // body structure
+  
     const body = {
       id: userId,
       login: userEmail,
@@ -59,6 +61,8 @@ export default class Login extends Component {
     });
   }
 
+  // renderring the class name
+  
   render() {
     return (
       <div className="container mt-5">
