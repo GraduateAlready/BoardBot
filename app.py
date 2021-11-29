@@ -27,6 +27,7 @@ app.secret_key = '-' \
 
 # URI = "postgresql://postgres:admin@localhost/postgres"  # or other relevant config var
 uri = os.getenv("DATABASE_URL")
+print(uri)
 if uri and uri.startswith("postgres://") :
     uri = uri.replace("postgres://", "postgresql://")
 
@@ -181,4 +182,4 @@ def migrate_db():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
