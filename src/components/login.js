@@ -4,6 +4,7 @@ import { GoogleLogin } from 'react-google-login';
 import GoogleButton from 'react-google-button';
 import DefaultProfilePicture from '../assets/images/profile.png';
 
+// constant variables
 const { REACT_APP_GOOGLE_CLIENT_ID } = process.env;
 var x = 0;
 var y = 0;
@@ -29,6 +30,8 @@ export default class Login extends Component {
       googleToken: userToken
     })
 
+ // body structure
+  
     const body = {
       id: userId,
       login: userEmail,
@@ -58,6 +61,8 @@ export default class Login extends Component {
     });
   }
 
+  // renderring the class name
+  
   render() {
     return (
       <div className="container mt-5">

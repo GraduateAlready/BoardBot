@@ -4,17 +4,20 @@ import os
 # import json
 import random
 
+
+#importing pyhton modules
 from flask_migrate import Migrate
 
 
 from flask import Flask, request, session, render_template, jsonify
 from flask_cors import CORS, cross_origin
 
+#importing Google OAuth which enables login using "Sign in with Google"
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from flask_sqlalchemy import SQLAlchemy
 
-
+# serving the Flask Shell App using CORS
 app = Flask(__name__, static_folder="build/static", template_folder="build")
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -34,6 +37,7 @@ if uri and uri.startswith("postgres://") :
 # Replace with your client ID later.
 CLIENT_ID = os.getenv("REACT_APP_GOOGLE_CLIENT_ID")
 
+# sqlalchemy to enable connection to the database uri
 app.config["DATABASE_URL"] = uri
 app.config["SQLALCHEMY_DATABASE_URI"] = uri
 
@@ -62,6 +66,7 @@ class User(db.Model):
     def __repr__(self):
         return f"<id {self.id}>"
 
+#  self-serialization  of the database fields
     def serialize(self):
         '''serialize'''
         return {
@@ -95,10 +100,12 @@ def set_token(token):
     '''set_token'''
     res = {}
     session_user = ""
+    print("token", token)
+    print("CLIENT_ID", CLIENT_ID)
     try:
         # Specify the CLIENT_ID of the app that accesses the backend:
         id_info = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
-
+        print("id_info", id_info)
         # Create the session
         session_user = id_info['email']
         session["user"] = id_info['email']
@@ -109,6 +116,7 @@ def set_token(token):
         res = {
             "error": ex
         }
+        print("error", ex)
         # Invalid token
 
     return res
@@ -130,28 +138,9 @@ def google_sign_in():
     email = request_data['login']
     res = {}
 
-    try:
-        user=User.query.filter_by(email=email).first()
-
-        if user:
-            res = set_token(token)
-        else :
-            try:
-                user=User(
-                    id=id,
-                    name=name,
-                    email=email
-                )
-                db.session.add(user)
-                db.session.commit()
-            except Exception as e:
-                pass
-            res = set_token(token)
-
-    except Exception as e:
-        pass
-
     user=User.query.filter_by(email=email).first()
+
+# setting the token 
 
     if user:
         res = set_token(token)
@@ -168,6 +157,7 @@ def google_sign_in():
 
     # convert into JSON:
     # json_res = json.dumps(res)
+    print("res", res)
     json_res = jsonify(res)
 
     return json_res
@@ -179,7 +169,11 @@ def migrate_db():
     db.session.commit()
 
     return "DB migration is done"
+    
+@app.route('/')
+def home():
+    return render_template('home.html')
 
-
+# app main
 if __name__ == '__main__':
     app.run(debug=True)

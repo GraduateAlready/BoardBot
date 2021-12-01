@@ -14,3 +14,29 @@
 .navbar-expand .navbar-nav .dropdown-menu {
     margin-left: -6em !important;
 }
+
+/* Links - change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+h1 {
+  background-color: lightgreen;
+}
+
+div {
+  background-color: lightblue;
+}
+
+p {
+  background-color: lightyellow;
+}
+
+p.outset {outline-style: outset;}
+
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}

@@ -1,6 +1,8 @@
 ### --- Deployment ---
 The web application is deployed on a Heroku site:
 
+https://graduatealready2.herokuapp.com/
+
 https://graduatealreadyprojerct.herokuapp.com/
 
 # Kanban Board
@@ -9,6 +11,8 @@ https://github.com/users/Keegan652/projects/1
 # BoardBot
 
 A node.js module to interface with a boardbot, running on Python Flask and served with React.
+
+The Kilter board is a modern take on a traditional training wall. Each hold has been scrutinized for comfort and grip style, allowing one to train on open hand holds, incuts, pinches, crimps and slopers. The LED light system will light up the holds that lay out the problem before you. The layout of these holds is standardized across the globe, allowing climbers to set and climb uniform problems no matter where they are on the planet! 
 
 
 ### --- Before Starting --- 
@@ -68,4 +72,5 @@ The program then proceeds to the main section of the web app.
 ### --- Acknowledgements ---
 
 ### Citations
-Lei Xu, Maria Skoularidou, Alfredo Cuesta-Infante, Kalyan Veeramachaneni. Modeling Tabular data using Conditional GAN. NeurIPS, 2019.
+Lei Xu, Maria Skoularidou, Alfredo Cuesta-Infante, Kalyan Veeramachaneni. 
+Modeling Tabular data using Conditional GAN. NeurIPS, 2019.

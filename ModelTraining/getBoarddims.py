@@ -5,6 +5,7 @@ import pandas as pd
 import pickle
 from itertools import chain
 
+# get table details with GET query 
 sync = {
     "client": {
         "enforces_product_passwords": 1,
@@ -133,6 +134,8 @@ auth = "Bearer " + r.json()["token"]
 
 headers = {"Authorization": auth}
 
+
+# handle requests from kilterboardapp.com
 r = requests.post("https://api.kilterboardapp.com/v1/sync", json=sync)
 
 climbs = r.json()["PUT"]["climbs"]
