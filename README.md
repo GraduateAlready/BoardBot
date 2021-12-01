@@ -1,7 +1,7 @@
 ### --- Deployment ---
 The web application is deployed on a Heroku site:
 
-https://graduatealready2projerct.herokuapp.com/
+https://graduatealready2.herokuapp.com/
 
 https://graduatealreadyprojerct.herokuapp.com/
 
