@@ -99,10 +99,12 @@ def set_token(token):
     '''set_token'''
     res = {}
     session_user = ""
+    print("token", token)
+    print("CLIENT_ID", CLIENT_ID)
     try:
         # Specify the CLIENT_ID of the app that accesses the backend:
         id_info = id_token.verify_oauth2_token(token, requests.Request(), CLIENT_ID)
-
+        print("id_info", id_info)
         # Create the session
         session_user = id_info['email']
         session["user"] = id_info['email']
@@ -113,6 +115,7 @@ def set_token(token):
         res = {
             "error": ex
         }
+        print("error", ex)
         # Invalid token
 
     return res
@@ -153,6 +156,7 @@ def google_sign_in():
 
     # convert into JSON:
     # json_res = json.dumps(res)
+    print("res", res)
     json_res = jsonify(res)
 
     return json_res
