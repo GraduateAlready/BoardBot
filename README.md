@@ -1,6 +1,7 @@
 ### --- Deployment ---
 The web application is deployed on a Heroku site:
 
+https://graduatealread2yprojerct.herokuapp.com/
 https://graduatealreadyprojerct.herokuapp.com/
 
 # Kanban Board
