@@ -165,9 +165,7 @@ export default class Home extends Component {
               <Dropdown.Menu className="mr-5">
                 <Dropdown.Item onClick={this.props.LogOut}>Log Out</Dropdown.Item>
               </Dropdown.Menu>
-            </Dropdown>
-          </Nav>
-        </Navbar>
+        </form>
         <form onClick={this.handleSubmit}>
           <input type="button" value="Generate climb" />
         </form>
