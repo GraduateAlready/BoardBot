@@ -40,3 +40,6 @@ p.outset {outline-style: outset;}
   width: 50%;
   padding: 10px;
 }
+div1 { 
+    display:none;
+}
