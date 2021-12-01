@@ -21,18 +21,6 @@
   color: black;
 }
 
-h1 {
-  background-color: lightgreen;
-}
-
-div {
-  background-color: lightblue;
-}
-
-p {
-  background-color: lightyellow;
-}
-
 p.outset {outline-style: outset;}
 
 .center {
