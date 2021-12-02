@@ -169,10 +169,6 @@ def migrate_db():
 
     return "DB migration is done"
     
-@app.route('/')
-def home():
-    return render_template('index.html')
-
 # app main
 if __name__ == '__main__':
     app.run(debug=True)
