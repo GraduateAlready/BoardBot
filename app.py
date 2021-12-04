@@ -1,7 +1,5 @@
-'''app.py'''
 import string
 import os
-# import json
 import random
 
 
@@ -117,9 +115,26 @@ def set_token(token):
     return res
 
 @app.route("/")
-def hello():
-    '''Main Page'''
-    return render_template('index.html')
+def index():
+   '''Main Page'''
+   return render_template('index.html')
+
+@app.route("/about")
+def about():
+   return render_template('about.html')
+
+@app.route("/contact")
+def contact():
+   return render_template('contact.html')
+
+@app.route("/other")
+def other():
+   return render_template('other.html')
+
+@app.route("/info")
+def info():
+   return render_template('info.html')
+
 
 # Enable CORS so frontend (localhost:3000) can communicate with backend (localhost:5000)
 @app.route('/api/auth', methods=['POST'])
@@ -163,11 +178,7 @@ def migrate_db():
     db.session.commit()
 
     return "DB migration is done"
-    
-@app.route('/')
-def home():
-    return render_template('home.html')
-
+   
 # app main
 if __name__ == '__main__':
     app.run(debug=True)

@@ -67,10 +67,3 @@ $ npm start
 The program uses Google OAuth Sign In to login into the system. A "Sign In with Google" option shows up to prompt the user to sign in to the site.
 After selecting the account, the user data is saved in a local database and displayed and the top right of the navbar.
 The program then proceeds to the main section of the web app.
-
-
-### --- Acknowledgements ---
-
-### Citations
-Lei Xu, Maria Skoularidou, Alfredo Cuesta-Infante, Kalyan Veeramachaneni. 
-Modeling Tabular data using Conditional GAN. NeurIPS, 2019.

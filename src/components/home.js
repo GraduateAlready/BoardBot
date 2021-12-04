@@ -180,16 +180,6 @@ export default class Home extends Component {
               </ul>
 	   </div>
         </nav>
-
-        <form>
-          <input type="button" onClick={this.drawCircle} />
-              <Dropdown.Menu className="mr-5">
-                <Dropdown.Item onClick={this.props.LogOut}>Log Out</Dropdown.Item>
-              </Dropdown.Menu>
-        </form>
-        <form onClick={this.handleSubmit}>
-          <input type="button" value="Generate climb" />
-        </form>
         <canvas ref="canvas" width={1080} height={1170} />
         <div1>
            <img ref="image" src={require('./kilterboard.png')} className="hidden" alt='' />
