@@ -1,0 +1,14 @@
+/* for all pages */
+
+
+body{
+    font-family: 'Segoe UI', sans-serif;;
+    font-size: 1rem;
+    line-height: 1.6;
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to right, #3ab5b0 0%, #3d99be 31%, #56317a 100%);
+
+}
+
+
