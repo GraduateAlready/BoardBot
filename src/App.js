@@ -2,6 +2,9 @@ import React, {useRef, useEffect, useState} from 'react';
 import * as tf from "@tensorflow/tfjs"
 import './index.css';
 
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from "react-toastify";
+
 function isRouteValid(visualdisplay){
   var holdTypesCount = {"mid":0,"feet":0,"start":0,"finish":0}
 
@@ -63,7 +66,7 @@ const App = () => {
 	const canvasRef = React.useRef(null);
 	const kilterboard = React.useRef(null);
 	const [model, setModel] = useState(null);
-	const [routes, setRoute] = useState();
+	const [route, setRoute] = useState(null);
 
 
 	const loadModel = async() => {
@@ -152,7 +155,6 @@ const App = () => {
 			const img = new Image()
 			img.src = "kilterboard.png"
 			await ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-			await ctx.drawImage(img, 0, 0);
 
 			visualdisplay.forEach(function (placement, index) {
 				vismap.forEach(function (axis, index) {
@@ -174,16 +176,54 @@ const App = () => {
 					}
 				});
 			});
+			await ctx.drawImage(img, 0, 0);
+
+			let placements = [];
+			visualdisplay.forEach(function (placement, index) {
+				let role_id = 15;
+				if(placement[1] == "finish"){
+					role_id = 14;
+				} else if (placement[1] == "start"){
+					role_id = 12;
+				} else if (placement[1] == "mid"){
+					role_id = 13;
+				}
+				let newPlacement = {'placement_id': placement[0], 'role_id': role_id, 'frame': 0};
+				placements.push(newPlacement);
+			});
+
+			await setRoute(placements);
+		}
+	}
+
+	const exportRoute = async(e) => {
+		if(model != null && route != null)
+		{
+			const res = await fetch('/export', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(route),
+			});
+			const body = await res.json();
+			let string = "Route exported, find it on the KilterBoard app by searching for " + body["Success"]
+			console.log(string)
+			toast.success(string);
 		}
 	}
 
 	return(
 	<div class = "Container">
+		<ToastContainer position="top-right" autoClose={10000} closeOnClick={false} draggable={false} pauseOnHover/>
 		<div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
 			<div class="card my-auto mx-auto">
 				<canvas class="card-img-top" id="canvas" ref={canvasRef}></canvas>
 				<div class="card-body text-center">
-					<button type="button" class="btn btn-success" onClick={generateRoute}>Generate Route</button>
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-success" onClick={generateRoute}>Generate Route</button>
+						<button type="button" class="btn btn-warning" onClick={exportRoute}>Send Route to App</button>
+					</div>
 				</div>
 			</div>
 		</div>
