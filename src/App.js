@@ -12,9 +12,9 @@ function isRouteValid(visualdisplay){
     holdTypesCount[placement[1]]++
   });
 
-  if (holdTypesCount["start"] == 0 || holdTypesCount["start"] > 2) {
+  if (holdTypesCount["start"] === 0 || holdTypesCount["start"] > 2) {
     return false;
-  } else if (holdTypesCount["finish"] == 0 || holdTypesCount["finish"] > 2) {
+  } else if (holdTypesCount["finish"] === 0 || holdTypesCount["finish"] > 2) {
     return false;
   } else if (holdTypesCount["finish"] + holdTypesCount["finish"] + holdTypesCount["finish"] + holdTypesCount["finish"] > 35) {
     return false;
@@ -72,7 +72,6 @@ const App = () => {
 	const loadModel = async() => {
 		const loadedModel = await tf.loadLayersModel('https://boardbot.s3.us-east-2.amazonaws.com/BoardBot/model.json');
 		setModel(loadedModel);
-		console.log('Model Loaded!');
 	}
 
 	useEffect(()=>{
@@ -132,11 +131,11 @@ const App = () => {
 					holdTypesCount[placement[1]]++
 				});
 
-				if (holdTypesCount["start"] == 0 || holdTypesCount["start"] > 2)
+				if (holdTypesCount["start"] === 0 || holdTypesCount["start"] > 2)
 				{
 					isRouteValid = false;
 				}
-				else if (holdTypesCount["finish"] == 0 || holdTypesCount["finish"] > 2)
+				else if (holdTypesCount["finish"] === 0 || holdTypesCount["finish"] > 2)
 				{
 					isRouteValid = false;
 				}
@@ -148,7 +147,6 @@ const App = () => {
 				{
 					isRouteValid = true;
 				}
-				console.log(isRouteValid);
 			}
 
 			const ctx = canvasRef.current.getContext('2d');
@@ -158,13 +156,13 @@ const App = () => {
 
 			visualdisplay.forEach(function (placement, index) {
 				vismap.forEach(function (axis, index) {
-					if(placement[0] == axis[0]){
+					if(placement[0] === axis[0]){
 						ctx.beginPath();
-						if(placement[1] == "finish"){
+						if(placement[1] === "finish"){
 							ctx.strokeStyle = '#f003fc';
-						} else if (placement[1] == "start"){
+						} else if (placement[1] === "start"){
 							ctx.strokeStyle = '#03fc5e';
-						} else if (placement[1] == "mid"){
+						} else if (placement[1] === "mid"){
 							ctx.strokeStyle = '#03d3fc';
 						} else{
 							ctx.strokeStyle = '#fca103';
@@ -176,16 +174,17 @@ const App = () => {
 					}
 				});
 			});
+
 			await ctx.drawImage(img, 0, 0);
 
 			let placements = [];
 			visualdisplay.forEach(function (placement, index) {
 				let role_id = 15;
-				if(placement[1] == "finish"){
+				if(placement[1] === "finish"){
 					role_id = 14;
-				} else if (placement[1] == "start"){
+				} else if (placement[1] === "start"){
 					role_id = 12;
-				} else if (placement[1] == "mid"){
+				} else if (placement[1] === "mid"){
 					role_id = 13;
 				}
 				let newPlacement = {'placement_id': placement[0], 'role_id': role_id, 'frame': 0};
@@ -208,7 +207,6 @@ const App = () => {
 			});
 			const body = await res.json();
 			let string = "Route exported, find it on the KilterBoard app by searching for " + body["Success"]
-			console.log(string)
 			toast.success(string);
 		}
 	}
